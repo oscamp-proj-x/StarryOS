@@ -1,7 +1,7 @@
 # Build Options
 export ARCH := riscv64
 export LOG := warn
-export DWARF := y
+export DWARF := n
 export MEMTRACK := n
 
 # QEMU Options
@@ -53,5 +53,8 @@ la:
 
 vf2:
 	$(MAKE) ARCH=riscv64 APP_FEATURES=vf2 MYPLAT=axplat-riscv64-visionfive2 BUS=mmio build
+
+rk3588:
+	$(MAKE) ARCH=aarch64 APP_FEATURES=rk3588 MYPLAT=axplat-aarch64-rk3588 SMP=8 BUS=mmio UIMAGE=y build
 
 .PHONY: build run justrun debug disasm clean
