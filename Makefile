@@ -18,9 +18,17 @@ export AX_LIB := axfeat
 export APP_FEATURES := qemu
 
 ifeq ($(MEMTRACK), y)
-	APP_FEATURES += starry-api/memtrack
+		APP_FEATURES += starry-api/memtrack
 endif
 
+# -----------------------------------------------------------------
+# Include RK3588 Deployment Module
+# -----------------------------------------------------------------
+-include rk3588_deploy.mk
+
+# -----------------------------------------------------------------
+# Standard Targets
+# -----------------------------------------------------------------
 default: build
 
 ROOTFS_URL = https://github.com/Starry-OS/rootfs/releases/download/20250917
@@ -44,7 +52,9 @@ defconfig justrun clean:
 build run debug disasm: defconfig
 	@make -C arceos $@
 
-# Aliases
+# -----------------------------------------------------------------
+# Platform Aliases
+# -----------------------------------------------------------------
 rv:
 	$(MAKE) ARCH=riscv64 run
 
@@ -54,7 +64,11 @@ la:
 vf2:
 	$(MAKE) ARCH=riscv64 APP_FEATURES=vf2 MYPLAT=axplat-riscv64-visionfive2 BUS=mmio build
 
+# Platform Rk3588
 rk3588:
-	$(MAKE) ARCH=aarch64 APP_FEATURES=rk3588 MYPLAT=axplat-aarch64-rk3588 SMP=8 BUS=mmio UIMAGE=y build
+	$(MAKE) ARCH=aarch64 APP_FEATURES=rk3588 MYPLAT=axplat-aarch64-rk3588 SMP=1 BUS=mmio UIMAGE=y build
 
-.PHONY: build run justrun debug disasm clean
+# Deploy Rk3588
+rk-deploy: rk3588 deploy
+
+.PHONY: build run justrun debug disasm clean rk3588 rk-deploy
