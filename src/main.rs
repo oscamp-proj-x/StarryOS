@@ -5,6 +5,9 @@
 #[macro_use]
 extern crate axlog;
 
+#[cfg(feature = "dyn")]
+extern crate axdriver_dyn;
+
 extern crate alloc;
 extern crate axruntime;
 
@@ -42,5 +45,5 @@ fn main() {
 #[cfg(feature = "vf2")]
 extern crate axplat_riscv64_visionfive2;
 
-#[cfg(feature = "rk3588")]
-extern crate axplat_aarch64_rk3588;
+#[cfg(all(target_arch = "aarch64", feature = "dyn"))]
+extern crate axplat_aarch64_dyn;

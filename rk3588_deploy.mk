@@ -12,7 +12,7 @@ OUT_DIR      := $(ROOT_DIR)/out
 ARCEOS_DIR   := $(ROOT_DIR)/arceos
 
 # Build Artifacts
-KERNEL_UIMG  := $(ROOT_DIR)/StarryOS_aarch64-rk3588.uimg
+KERNEL_UIMG  := $(ROOT_DIR)/StarryOS_aarch64-dyn.uimg
 DTB_FILE     := $(TOOLS_DIR)/rk3588-orangepi-5-plus.dtb
 BOOT_CMD     := $(TOOLS_DIR)/boot.cmd
 BOOT_SCR     := $(OUT_DIR)/boot.scr
