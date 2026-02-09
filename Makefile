@@ -66,7 +66,11 @@ vf2:
 
 # Platform Rk3588
 rk3588:
-	$(MAKE) ARCH=aarch64 APP_FEATURES=rk3588 MYPLAT=axplat-aarch64-rk3588 SMP=1 BUS=mmio UIMAGE=y build
+	$(MAKE) ARCH=aarch64 APP_FEATURES=dyn MYPLAT=axplat-aarch64-dyn LD_SCRIPT=link.x SMP=8 BUS=mmio UIMAGE=y  FEATURES=driver-dyn  build
+
+aarch64-dyn:
+	@export DWARF=n
+	$(MAKE) ARCH=aarch64 APP_FEATURES=dyn BUS=mmio LD_SCRIPT=link.x MYPLAT=axplat-aarch64-dyn FEATURES=driver-dyn build
 
 # Deploy Rk3588
 rk-deploy: rk3588 deploy
