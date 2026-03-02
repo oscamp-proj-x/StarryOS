@@ -70,7 +70,7 @@ rk3588:
 
 aarch64-dyn:
 	@export DWARF=n
-	$(MAKE) ARCH=aarch64 APP_FEATURES=dyn BUS=mmio LD_SCRIPT=link.x MYPLAT=axplat-aarch64-dyn FEATURES=driver-dyn build
+	$(MAKE) ARCH=aarch64 APP_FEATURES=dyn BUS=mmio LD_SCRIPT=link.x MYPLAT=axplat-aarch64-dyn FEATURES=driver-dyn run
 
 # Deploy Rk3588
 rk-deploy: rk3588 deploy
