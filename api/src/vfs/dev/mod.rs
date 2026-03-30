@@ -11,10 +11,13 @@ mod memtrack;
 mod rtc;
 pub mod tty;
 
+pub mod usb;
+
 use alloc::{format, sync::Arc};
 use core::any::Any;
 
 use axerrno::AxError;
+use axfs::FsContext;
 use axfs_ng_vfs::{DeviceId, Filesystem, NodeFlags, NodeType, VfsResult};
 use axsync::Mutex;
 #[cfg(feature = "dev-log")]
@@ -24,8 +27,8 @@ use starry_core::vfs::{Device, DeviceOps, DirMaker, DirMapping, SimpleDir, Simpl
 
 const RANDOM_SEED: &[u8; 32] = b"0123456789abcdef0123456789abcdef";
 
-pub(crate) fn new_devfs() -> Filesystem {
-    SimpleFs::new_with("devfs".into(), 0x01021994, builder)
+pub(crate) fn new_devfs(gfs: &FsContext) -> Filesystem {
+    SimpleFs::new_with("devfs".into(), 0x01021994, gfs, builder)
 }
 
 struct Null;
@@ -141,7 +144,7 @@ impl DeviceOps for CpuDmaLatency {
     }
 }
 
-fn builder(fs: Arc<SimpleFs>) -> DirMaker {
+fn builder(fs: Arc<SimpleFs>, gfs: &FsContext) -> DirMaker {
     let mut root = DirMapping::new();
     root.add(
         "null",
@@ -294,6 +297,9 @@ fn builder(fs: Arc<SimpleFs>) -> DirMaker {
         "input",
         SimpleDir::new_maker(fs.clone(), Arc::new(event::input_devices(fs.clone()))),
     );
+
+    // USB devices
+    usb::builder(fs.clone(), &mut root, gfs);
 
     SimpleDir::new_maker(fs, Arc::new(root))
 }

@@ -66,6 +66,14 @@ zerocopy = { version = "0.8.26", features = ["derive"] }
 
 starry-core.workspace = true
 
+axdriver-dyn = { workspace = true }
+crab-usb = { path = "../CrabUSB/usb-host" }
+usb-if = { path = "../CrabUSB/usb-if" }
+spin_on = "0.1.1"
+mbarrier = "0.1"
+dma-api = { version = "0.7" }
+aarch64-cpu-ext = "0.1"
+
 [target.'cfg(target_arch = "x86_64")'.dependencies]
 x86 = "0.52"
 

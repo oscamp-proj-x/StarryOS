@@ -2491,7 +2491,7 @@
 			power-domains = <0x61 0x1f>;
 			resets = <0x02 0x2a4>;
 			reset-names = "usb3-otg";
-			dr_mode = "otg";
+			dr_mode = "host";
 			phys = <0x67 0x68>;
 			phy-names = "usb2-phy\0usb3-phy";
 			phy_type = "utmi_wide";
@@ -2622,7 +2622,7 @@
 			snps,dis_rxdet_inp3_quirk;
 			snps,parkmode-disable-hs-quirk;
 			snps,parkmode-disable-ss-quirk;
-			status = "disabled";
+			status = "okay";
 			phandle = <0x25c>;
 		};
 	};

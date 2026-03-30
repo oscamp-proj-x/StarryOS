@@ -9,6 +9,7 @@ use alloc::{
 };
 use core::{ffi::CStr, iter};
 
+use axfs::FsContext;
 use axfs_ng_vfs::{Filesystem, NodeType, VfsError, VfsResult};
 use axtask::{AxTaskRef, WeakAxTaskRef, current};
 use indoc::indoc;
@@ -83,8 +84,8 @@ const DUMMY_MEMINFO: &str = indoc! {"
     DirectMap1G:     1048576 kB
 "};
 
-pub fn new_procfs() -> Filesystem {
-    SimpleFs::new_with("proc".into(), 0x9fa0, builder)
+pub fn new_procfs(gfs: &FsContext) -> Filesystem {
+    SimpleFs::new_with("proc".into(), 0x9fa0, gfs,builder)
 }
 
 struct ProcessTaskDir {
@@ -352,7 +353,7 @@ impl SimpleDirOps for ProcFsHandler {
     }
 }
 
-fn builder(fs: Arc<SimpleFs>) -> DirMaker {
+fn builder(fs: Arc<SimpleFs>, _gfs:&FsContext) -> DirMaker {
     let mut root = DirMapping::new();
     root.add(
         "mounts",

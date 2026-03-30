@@ -1,6 +1,7 @@
 use alloc::{string::String, sync::Arc};
 use core::{any::Any, time::Duration};
 
+use axfs::FsContext;
 use axfs_ng_vfs::{
     DeviceId, DirEntry, DirNode, Filesystem, FilesystemOps, Metadata, MetadataUpdate, NodeOps,
     NodePermission, NodeType, Reference, StatFs, VfsResult, path::MAX_NAME_LEN,
@@ -35,13 +36,13 @@ pub struct SimpleFs {
     inodes: Mutex<Slab<()>>,
     root: Mutex<Option<DirEntry>>,
 }
-
 impl SimpleFs {
     /// Creates a new simple filesystem.
     pub fn new_with(
         name: String,
         fs_type: u32,
-        root: impl FnOnce(Arc<Self>) -> DirMaker,
+        gfs: &FsContext,
+        root: impl FnOnce(Arc<Self>, &FsContext) -> DirMaker,
     ) -> Filesystem {
         let fs = Arc::new(Self {
             name,
@@ -49,7 +50,7 @@ impl SimpleFs {
             inodes: Mutex::new(Slab::new()),
             root: Mutex::new(None),
         });
-        let root = root(fs.clone());
+        let root = root(fs.clone(), gfs);
         fs.set_root(DirEntry::new_dir(
             |this| DirNode::new(root(this)),
             Reference::root(),

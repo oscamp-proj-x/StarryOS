@@ -1,7 +1,7 @@
 [workspace]
 resolver = "2"
 members = ["api", "core"]
-exclude = ["arceos"]
+exclude = ["arceos", "CrabUSB"]
 
 [workspace.package]
 version = "0.1.0"
@@ -146,3 +146,4 @@ all-features = true
 
 [target.'cfg(target_arch = "aarch64")'.dependencies]
 axplat-aarch64-dyn = { path = "../axplat-aarch64-dyn", features = ["irq","smp"], optional = true }
+
