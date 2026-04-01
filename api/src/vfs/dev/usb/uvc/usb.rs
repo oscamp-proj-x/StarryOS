@@ -3,7 +3,7 @@ extern crate alloc;
 use alloc::sync::Arc;
 use core::any::Any;
 
-use axfs::{FS_CONTEXT, FileFlags, OpenOptions};
+// use axfs::{FS_CONTEXT, FileFlags, OpenOptions};
 use axfs_ng_vfs::{NodeFlags, VfsError, VfsResult};
 use axhal::asm::user_copy;
 use axtask::{TaskInner, future::block_on, spawn_task};
@@ -12,7 +12,7 @@ use spin::Mutex;
 use starry_core::vfs::DeviceOps;
 
 use super::*;
-use crate::{io::IoVectorBufIo, vfs::dev::usb::uvc::frame::FrameEvent};
+use crate::{vfs::dev::usb::uvc::frame::FrameEvent};
 
 pub struct UVC {
     uvc: Arc<Mutex<UvcDevice>>,
@@ -637,7 +637,7 @@ impl DeviceOps for UVC {
         }
     }
 
-    fn as_any(&self) -> &(dyn Any) {
+    fn as_any(&self) -> &dyn Any {
         self
     }
 

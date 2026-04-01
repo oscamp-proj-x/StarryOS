@@ -6,6 +6,7 @@ use crab_usb::err::USBError;
 // 参考libuvc的实现结构
 
 /// UVC类特定请求常量 (A.8)
+#[allow(unused)]
 pub mod request_codes {
     pub const SET_CUR: u8 = 0x01;
     pub const GET_CUR: u8 = 0x81;
@@ -18,6 +19,7 @@ pub mod request_codes {
 }
 
 /// UVC接口子类代码 (A.2)
+#[allow(unused)]
 pub mod interface_subclass {
     pub const UNDEFINED: u8 = 0x00;
     pub const VIDEO_CONTROL: u8 = 0x01;
@@ -26,11 +28,13 @@ pub mod interface_subclass {
 }
 
 /// UVC协议代码 (A.3)
+#[allow(unused)]
 pub mod protocol_codes {
     pub const UNDEFINED: u8 = 0x00;
 }
 
 /// VideoControl接口描述符子类型 (A.5)
+#[allow(unused)]
 pub mod vc_descriptor_subtypes {
     pub const UNDEFINED: u8 = 0x00;
     pub const HEADER: u8 = 0x01;
@@ -42,6 +46,7 @@ pub mod vc_descriptor_subtypes {
 }
 
 /// VideoStreaming接口描述符子类型 (A.6)
+#[allow(unused)]
 pub mod vs_descriptor_subtypes {
     pub const UNDEFINED: u8 = 0x00;
     pub const INPUT_HEADER: u8 = 0x01;
@@ -63,6 +68,7 @@ pub mod vs_descriptor_subtypes {
 }
 
 /// UVC描述符类型
+#[allow(unused)]
 pub mod descriptor_types {
     pub const DEVICE: u8 = 0x01;
     pub const CONFIGURATION: u8 = 0x02;
@@ -74,6 +80,7 @@ pub mod descriptor_types {
 }
 
 /// 摄像头终端控制选择器 (A.9.4)
+#[allow(unused)]
 pub mod camera_terminal_controls {
     pub const UNDEFINED: u8 = 0x00;
     pub const SCANNING_MODE: u8 = 0x01;
@@ -99,6 +106,7 @@ pub mod camera_terminal_controls {
 }
 
 /// 处理单元控制选择器 (A.9.5)
+#[allow(unused)]
 pub mod processing_unit_controls {
     pub const UNDEFINED: u8 = 0x00;
     pub const BACKLIGHT_COMPENSATION: u8 = 0x01;
@@ -123,6 +131,7 @@ pub mod processing_unit_controls {
 }
 
 /// VideoStreaming接口控制选择器 (A.9.7)
+#[allow(unused)]
 pub mod video_streaming_controls {
     pub const UNDEFINED: u8 = 0x00;
     pub const PROBE: u8 = 0x01;
@@ -137,6 +146,7 @@ pub mod video_streaming_controls {
 }
 
 /// 终端类型常量 (B.1-B.4)
+#[allow(unused)]
 pub mod terminal_types {
     // USB终端类型 (B.1)
     pub const TT_VENDOR_SPECIFIC: u16 = 0x0100;
@@ -160,6 +170,7 @@ pub mod terminal_types {
 }
 
 /// UVC格式GUID常量
+#[allow(unused)]
 pub mod format_guids {
     // YUY2 格式 GUID
     pub const YUY2: [u8; 16] = [
@@ -193,6 +204,7 @@ pub mod format_guids {
 }
 
 /// 载荷头标志 (2.4.3.3)
+#[allow(unused)]
 pub mod payload_header_flags {
     pub const EOH: u8 = 1 << 7; // End of Header
     pub const ERR: u8 = 1 << 6; // Error
@@ -205,6 +217,7 @@ pub mod payload_header_flags {
 }
 
 /// 控制能力标志 (4.1.2)
+#[allow(unused)]
 pub mod control_capabilities {
     pub const GET: u8 = 1 << 0;
     pub const SET: u8 = 1 << 1;

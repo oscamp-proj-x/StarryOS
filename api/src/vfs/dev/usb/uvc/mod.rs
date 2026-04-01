@@ -35,6 +35,7 @@ pub mod uvc_requests {
     pub use crate::vfs::dev::usb::uvc::descriptors::request_codes::*;
 }
 
+#[allow(unused)]
 pub mod pu_controls {
     pub use crate::vfs::dev::usb::uvc::descriptors::processing_unit_controls::*;
     // 添加原有的常量别名
@@ -60,6 +61,7 @@ pub mod pu_controls {
         super::descriptors::processing_unit_controls::WHITE_BALANCE_COMPONENT_AUTO;
 }
 
+#[allow(unused)]
 pub mod vs_controls {
     pub use crate::vfs::dev::usb::uvc::descriptors::video_streaming_controls::*;
     // 添加原有的常量别名
@@ -79,6 +81,7 @@ pub mod uvc_descriptor_types {
     pub use crate::vfs::dev::usb::uvc::descriptors::descriptor_types::*;
 }
 
+#[allow(unused)]
 pub mod uvc_interface_subtypes {
     // 保持原有命名
     pub const VC_DESCRIPTOR_UNDEFINED: u8 = super::descriptors::vc_descriptor_subtypes::UNDEFINED;

@@ -1,17 +1,17 @@
 extern crate alloc;
 use alloc::vec::Vec;
-use core::{alloc::Layout, hint, num::NonZeroUsize, ptr::NonNull, time::Duration};
+use core::{ptr::NonNull, time::Duration};
 
 use axerrno::AxError;
 use axhal::{
-    mem::{PhysAddr, VirtAddr, phys_to_virt, virt_to_phys},
+    mem::{PhysAddr, phys_to_virt},
     paging::MappingFlags,
 };
 use axmm::kernel_aspace;
 use axtask::spawn_with_name;
 use crab_usb::err::USBError;
 pub use crab_usb::*;
-use dma_api::{DmaDirection, DmaError, DmaHandle, DmaMapHandle};
+// use dma_api::{DmaDirection, DmaError, DmaHandle, DmaMapHandle};
 use mbarrier::mb;
 use spin::{Mutex, Once};
 
@@ -109,7 +109,7 @@ impl dma_api::DmaOp for KernelImpl {
         let phys = axhal::mem::virt_to_phys(vaddr).as_usize() as u64;
         let layout = core::alloc::Layout::from_size_align(size, align.max(1)).unwrap();
         
-        Ok(dma_api::DmaMapHandle::new(addr, phys.into(), layout, None))
+        Ok(unsafe {dma_api::DmaMapHandle::new(addr, phys.into(), layout, None)})
     }
 
     unsafe fn unmap_single(&self, handle: dma_api::DmaMapHandle) {
@@ -247,7 +247,7 @@ pub fn get_device_list() -> Result<Vec<DeviceInfo>, USBError> {
         
         warn!("[USB] 等待设备连接 (最多10秒)...");
         let mut connected = false;
-        for i in 0..50 {
+        for _ in 0..50 {
             unsafe {
                 let phys_base = axhal::mem::PhysAddr::from(0xfc400000);
                 if let Ok(vaddr) = iomap(phys_base, 0x10000) {

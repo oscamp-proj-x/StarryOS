@@ -69,25 +69,25 @@ impl UsbDevice {
 pub struct UsbDeviceOther {}
 
 impl UsbDeviceOther {
-    pub fn new(device_info: &DeviceInfo) -> Self {
+    pub fn new(_: &DeviceInfo) -> Self {
         Self {}
     }
 }
 
 impl DeviceOps for UsbDeviceOther {
-    fn read_at(&self, buf: &mut [u8], offset: u64) -> VfsResult<usize> {
+    fn read_at(&self, _: &mut [u8], _: u64) -> VfsResult<usize> {
         panic!("todo")
     }
 
-    fn write_at(&self, buf: &[u8], offset: u64) -> VfsResult<usize> {
+    fn write_at(&self, _: &[u8], _: u64) -> VfsResult<usize> {
         panic!("todo")
     }
 
-    fn ioctl(&self, cmd: u32, arg: usize) -> VfsResult<usize> {
+    fn ioctl(&self, _: u32, _: usize) -> VfsResult<usize> {
         panic!("todo")
     }
 
-    fn as_any(&self) -> &(dyn Any) {
+    fn as_any(&self) -> &dyn Any {
         self
     }
 
