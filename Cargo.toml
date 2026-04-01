@@ -145,5 +145,5 @@ platforms = ["riscv64gc-unknown-none-elf", "loongarch64-unknown-none-softfloat"]
 all-features = true
 
 [target.'cfg(target_arch = "aarch64")'.dependencies]
-axplat-aarch64-dyn = { path = "../axplat-aarch64-dyn", features = ["irq","smp"], optional = true }
+axplat-aarch64-dyn = { git = "https://github.com/oscamp-proj-x/axplat-aarch64-dyn", features = ["irq","smp"], optional = true }
 

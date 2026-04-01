@@ -14,3 +14,6 @@
 *.swp
 *.swo
 
+/out
+StarryOS_aarch64-dyn.uimg
+StarryOS_aarch64-rk3588.uimg
